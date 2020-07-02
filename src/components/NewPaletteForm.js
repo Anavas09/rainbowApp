@@ -76,6 +76,8 @@ const useStyles = makeStyles((theme) => ({
 function NewPaletteForm() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [currentColor, setCurrentColor] = useState("skyblue");
+  const [colors, setColors] = useState(["orange","#E689C1"]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -84,6 +86,14 @@ function NewPaletteForm() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleChangeColor = newColor => {
+    setCurrentColor(newColor.hex)
+  }
+
+  const addNewColor = () => {
+    setColors([...colors, currentColor])
+  }
 
   return (
     <div className={classes.root}>
@@ -132,10 +142,16 @@ function NewPaletteForm() {
         <Button variant="contained" color="primary">Random Color</Button>
         </div>
         <ChromePicker
-          color="skyblue"
-          onChangeComplete={(nc)=> console.log(nc)}
+          color={currentColor}
+          onChangeComplete={handleChangeColor}
         />
-        <Button variant="contained" color="primary">Add Color</Button>
+        <Button
+          variant="contained"
+          style={{backgroundColor: currentColor}}
+          onClick={addNewColor}
+        >
+          Add Color
+        </Button>
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -143,6 +159,13 @@ function NewPaletteForm() {
         })}
       >
         <div className={classes.drawerHeader} />
+        <ul>
+          {colors.map(color => {
+            return (
+              <li>{color}</li>
+            )
+          })}
+        </ul>
       </main>
     </div>
   );
