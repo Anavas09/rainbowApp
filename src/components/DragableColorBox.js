@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-function DragableColorBox({color}) {
+function DragableColorBox({color, colorName}) {
   const [grabbing, setGrabbing] = useState(false)
   const classes = useStyles()
 
@@ -29,7 +29,7 @@ function DragableColorBox({color}) {
       }}
       onClick={handleOnClick}
     >
-      {color}
+      {colorName}
     </div>
   )
 }
