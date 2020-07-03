@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 function ColorPicker({ addNewColor, allColors, currentColor, changeColor }) {
-  const [newName, setNewName] = useState("");
+  const [newColorName, setNewColorName] = useState("");
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -22,12 +22,12 @@ function ColorPicker({ addNewColor, allColors, currentColor, changeColor }) {
   };
 
   const handleChangeName = e => {
-    setNewName(e.target.value);
+    setNewColorName(e.target.value);
   };
 
   const handleOnSubmit = () => {
-    addNewColor(newName);
-    setNewName("");
+    addNewColor(newColorName);
+    setNewColorName("");
   };
 
   return (
@@ -44,7 +44,8 @@ function ColorPicker({ addNewColor, allColors, currentColor, changeColor }) {
       <ChromePicker color={currentColor} onChangeComplete={handleChangeColor} />
       <ValidatorForm onSubmit={handleOnSubmit}>
         <TextValidator
-          value={newName}
+          value={newColorName}
+          name="newColorName"
           onChange={handleChangeName}
           validators={["required", "isColorNameUnique", "isColorUnique"]}
           errorMessages={[
