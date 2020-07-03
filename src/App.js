@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Palette from "./components/Palette";
@@ -10,26 +10,36 @@ import seedColors from "./seedColors";
 import { generatePalette } from "./helpers/colorHelper";
 
 function App() {
-  const findPalette = (id) => {
-    return seedColors.find((palette) => {
+  const [palettes, setPalettes] = useState(seedColors);
+
+  const findPalette = id => {
+    return palettes.find(palette => {
       return palette.id === id;
     });
   };
 
+  const savePalette = newPalette => {
+    setPalettes([...palettes, newPalette]);
+  };
+
   return (
     <Switch>
-      <Route exact path="/palette/new" render={()=> <NewPaletteForm />}/>
+      <Route
+        exact
+        path="/palette/new"
+        render={routeProps => <NewPaletteForm saveNewPalette={savePalette} {...routeProps}/>}
+      />
       <Route
         exact
         path="/"
-        render={(routerProps) => (
-          <PaletteList palettes={seedColors} {...routerProps} />
+        render={routerProps => (
+          <PaletteList palettes={palettes} {...routerProps} />
         )}
       />
       <Route
         exact
         path="/palette/:id"
-        render={(routerProps) => {
+        render={routerProps => {
           const { id } = routerProps.match.params;
           return <Palette palette={generatePalette(findPalette(id))} />;
         }}
@@ -37,7 +47,7 @@ function App() {
       <Route
         exact
         path="/palette/:paletteId/:colorId"
-        render={(routerProps) => {
+        render={routerProps => {
           const { paletteId } = routerProps.match.params;
           return (
             <SingleColorPalette
