@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForeverSharp';
+import React from "react";
+import { SortableElement } from "react-sortable-hoc";
+import { makeStyles } from "@material-ui/core/styles";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForeverSharp";
 
 const useStyles = makeStyles(() => ({
   DragableColorBox: {
@@ -11,13 +12,13 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     width: "20%",
     "&:hover": {
-      cursor: "grab"
+      cursor: "grab",
     },
     "&:hover svg": {
       color: "white",
       cursor: "pointer",
-      transform: "scale(1.5)"
-    }
+      transform: "scale(1.5)",
+    },
   },
   boxContent: {
     bottom: "0px",
@@ -30,19 +31,18 @@ const useStyles = makeStyles(() => ({
     padding: "10px",
     position: "absolute",
     textTransform: "uppercase",
-    width: "100%"
+    width: "100%",
   },
-  deleteIcon:{
-    transition: "all 0.3s ease-in-out"
-  }
-}))
+  deleteIcon: {
+    transition: "all 0.3s ease-in-out",
+  },
+}));
 
-function DragableColorBox({color, colorName}) {
-  const [grabbing, setGrabbing] = useState(false)
-  const classes = useStyles()
+const DragableColorBox = SortableElement(({ color, colorName, removeColor }) => {
+  const classes = useStyles();
 
   const handleOnClick = () => {
-    setGrabbing(true);
+    removeColor()
   }
 
   return (
@@ -51,14 +51,13 @@ function DragableColorBox({color, colorName}) {
       style={{
         backgroundColor: color,
       }}
-      onClick={handleOnClick}
     >
       <div className={classes.boxContent}>
         <span>{colorName}</span>
-        <DeleteForeverIcon className={classes.deleteIcon}/>
+        <DeleteForeverIcon className={classes.deleteIcon} onClick={handleOnClick}/>
       </div>
     </div>
-  )
-}
+  );
+})
 
 export default DragableColorBox;

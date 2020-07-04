@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import arrayMove from "array-move";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -14,8 +15,8 @@ import { Button } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import DragableColorBox from "./DragableColorBox";
 import ColorPicker from "./ColorPicker";
+import DragableColorList from "./DragableColorList";
 
 const drawerWidth = 340; //px
 
@@ -89,7 +90,9 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-      palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
+      palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+      )
     );
   }, [palettes]);
 
@@ -110,6 +113,10 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
     setColors([...colors, newColor]);
   };
 
+  const removeColor = colorName => {
+    setColors(colors.filter(color => color.name !== colorName));
+  };
+
   const handleSubmit = () => {
     let newId = newPaletteName;
     const newPalette = {
@@ -123,6 +130,10 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
 
   const handleChange = e => {
     setNewPaletteName(e.target.value);
+  };
+
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    setColors(arrayMove(colors, oldIndex, newIndex));
   };
 
   return (
@@ -153,8 +164,11 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
               label="Palette Name"
               name="newPaletteName"
               value={newPaletteName}
-              validators={["required","isPaletteNameUnique"]}
-              errorMessages={["Enter Palette Name","Palette Name already used"]}
+              validators={["required", "isPaletteNameUnique"]}
+              errorMessages={[
+                "Enter Palette Name",
+                "Palette Name already used",
+              ]}
               onChange={handleChange}
             />
             <Button variant="contained" color="primary" type="submit">
@@ -191,15 +205,12 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        {colors.map(color => {
-          return (
-            <DragableColorBox
-              key={color.name}
-              color={color.color}
-              colorName={color.name}
-            />
-          );
-        })}
+        <DragableColorList
+          colors={colors}
+          removeColor={removeColor}
+          axis="xy"
+          onSortEnd={onSortEnd}
+        />
       </main>
     </div>
   );
