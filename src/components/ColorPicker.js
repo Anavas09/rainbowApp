@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { ChromePicker } from "react-color";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import { makeStyles } from "@material-ui/styles";
 
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -9,17 +10,24 @@ ColorPicker.defaultProps = {
   maxColors: 20,
 };
 
+const useStyles = makeStyles(() => ({
+  root: {
+    background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
+  },
+}));
+
 function ColorPicker({
   addNewColor,
   addRandomColor,
   allColors,
   allPalettes,
-  currentColor,
-  changeColor,
   clearColors,
   maxColors,
 }) {
+  const [currentColor, setCurrentColor] = useState("skyblue");
   const [newColorName, setNewColorName] = useState("");
+
+  const classes = useStyles();
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -31,7 +39,7 @@ function ColorPicker({
   }, [allColors, currentColor]);
 
   const handleChangeColor = newColor => {
-    changeColor(newColor);
+    setCurrentColor(newColor.hex);
   };
 
   const handleChangeName = e => {
@@ -39,7 +47,8 @@ function ColorPicker({
   };
 
   const handleOnSubmit = () => {
-    addNewColor(newColorName);
+    const newColor = { color: currentColor, name: newColorName };
+    addNewColor(newColor);
     setNewColorName("");
   };
 
@@ -65,7 +74,7 @@ function ColorPicker({
   const paletteIsFull = allColors.length >= maxColors;
 
   return (
-    <Fragment>
+    <div className={classes.root}>
       <Typography variant="button">Chose Your Colors</Typography>
       <div>
         <Button
@@ -108,7 +117,7 @@ function ColorPicker({
           {paletteIsFull ? "Palette Full" : "Add color"}
         </Button>
       </ValidatorForm>
-    </Fragment>
+    </div>
   );
 }
 

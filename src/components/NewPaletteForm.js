@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
   },
   drawerHeader: {
     display: "flex",
@@ -74,10 +75,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function NewPaletteForm({ history, palettes, maxColors, saveNewPalette }) {
+function NewPaletteForm({ history, palettes, saveNewPalette }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [currentColor, setCurrentColor] = useState("skyblue");
   const [colors, setColors] = useState(palettes[0].colors);
 
   const handleDrawerOpen = () => {
@@ -88,12 +88,7 @@ function NewPaletteForm({ history, palettes, maxColors, saveNewPalette }) {
     setOpen(false);
   };
 
-  const handleChangeColor = newColor => {
-    setCurrentColor(newColor.hex);
-  };
-
-  const addNewColor = colorName => {
-    const newColor = { color: currentColor, name: colorName };
+  const addNewColor = newColor => {
     setColors([...colors, newColor]);
   };
 
@@ -152,8 +147,6 @@ function NewPaletteForm({ history, palettes, maxColors, saveNewPalette }) {
           addRandomColor={addRandomColor}
           allColors={colors}
           allPalettes={palettes}
-          currentColor={currentColor}
-          changeColor={handleChangeColor}
           clearColors={handleClearColors}
         />
       </Drawer>
