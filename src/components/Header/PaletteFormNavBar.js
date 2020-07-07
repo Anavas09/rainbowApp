@@ -3,6 +3,8 @@ import clsx from "clsx";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { Link } from "react-router-dom";
 
+import { makeStyles } from "@material-ui/core/styles";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,14 +14,43 @@ import { Button } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
 
-function PaletteFormNavBar({
-  classes,
-  handleDrawerOpen,
-  handleSubmit,
-  open,
-  palettes
-}) {
+const drawerWidth = 340; //px
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: "64px",
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: "none",
+  },
+  navButtons: {},
+}));
+
+function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
   const [newPaletteName, setNewPaletteName] = useState("");
+
+  const classes = useStyles();
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
@@ -30,19 +61,19 @@ function PaletteFormNavBar({
   }, [palettes]);
 
   const handleOnClick = () => {
-    handleDrawerOpen()
-  }
+    handleDrawerOpen();
+  };
 
   const handleOnSubmit = () => {
-    handleSubmit(newPaletteName)
-  }
+    handleSubmit(newPaletteName);
+  };
 
   const handleChange = e => {
     setNewPaletteName(e.target.value);
   };
 
   return (
-    <Fragment>
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -62,8 +93,10 @@ function PaletteFormNavBar({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Crate Your New Palette
           </Typography>
+        </Toolbar>
+        <div className={classes.navButtons}>
           <ValidatorForm onSubmit={handleOnSubmit}>
             <TextValidator
               label="Palette Name"
@@ -79,15 +112,15 @@ function PaletteFormNavBar({
             <Button variant="contained" color="primary" type="submit">
               Save Button
             </Button>
-            <Link to="/">
-              <Button variant="contained" color="secondary">
-                Go Back
-              </Button>
-            </Link>
           </ValidatorForm>
-        </Toolbar>
+          <Link to="/">
+            <Button variant="contained" color="secondary">
+              Go Back
+            </Button>
+          </Link>
+        </div>
       </AppBar>
-    </Fragment>
+    </div>
   );
 }
 
