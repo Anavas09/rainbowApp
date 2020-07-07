@@ -5,7 +5,20 @@ import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-function ColorPicker({ addNewColor, allColors, currentColor, changeColor }) {
+ColorPicker.defaultProps = {
+  maxColors: 20,
+};
+
+function ColorPicker({
+  addNewColor,
+  addRandomColor,
+  allColors,
+  allPalettes,
+  currentColor,
+  changeColor,
+  clearColors,
+  maxColors,
+}) {
   const [newColorName, setNewColorName] = useState("");
 
   useEffect(() => {
@@ -30,36 +43,69 @@ function ColorPicker({ addNewColor, allColors, currentColor, changeColor }) {
     setNewColorName("");
   };
 
+  const handleClearColors = () => {
+    clearColors();
+  };
+
+  const handleRandomColor = () => {
+    //newColors Array with arrays
+    const newColors = allPalettes.map(palettes => {
+      return palettes.colors;
+    });
+
+    //One array with all colors
+    const colors = newColors.flat();
+
+    const randNum = Math.floor(Math.random() * colors.length);
+    const randColor = colors[randNum];
+
+    addRandomColor(randColor);
+  };
+
+  const paletteIsFull = allColors.length >= maxColors;
+
   return (
     <Fragment>
       <Typography variant="button">Chose Your Colors</Typography>
       <div>
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleClearColors}
+        >
           Clear Palette
         </Button>
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={paletteIsFull}
+          onClick={handleRandomColor}
+        >
           Random Color
         </Button>
       </div>
       <ChromePicker color={currentColor} onChangeComplete={handleChangeColor} />
       <ValidatorForm onSubmit={handleOnSubmit}>
-        <TextValidator
-          value={newColorName}
-          name="newColorName"
-          onChange={handleChangeName}
-          validators={["required", "isColorNameUnique", "isColorUnique"]}
-          errorMessages={[
-            "Enter a color name",
-            "The color name already used",
-            "This color has been used",
-          ]}
-        />
+        {!paletteIsFull && (
+          <TextValidator
+            value={newColorName}
+            name="newColorName"
+            onChange={handleChangeName}
+            validators={["required", "isColorNameUnique", "isColorUnique"]}
+            errorMessages={[
+              "Enter a color name",
+              "The color name already used",
+              "This color has been used",
+            ]}
+          />
+        )}
         <Button
-          style={{ backgroundColor: currentColor }}
+          style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
           type="submit"
           variant="contained"
+          disabled={paletteIsFull}
         >
-          Add Color
+          {paletteIsFull ? "Palette Full" : "Add color"}
         </Button>
       </ValidatorForm>
     </Fragment>

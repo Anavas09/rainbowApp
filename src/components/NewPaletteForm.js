@@ -78,14 +78,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function NewPaletteForm({ history, palettes, saveNewPalette }) {
+function NewPaletteForm({ history, palettes, maxColors, saveNewPalette }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState("skyblue");
-  const [colors, setColors] = useState([
-    { color: "orange", name: "orange" },
-    { color: "#E689C1", name: "beautypink" },
-  ]);
+  const [colors, setColors] = useState(palettes[0].colors);
   const [newPaletteName, setNewPaletteName] = useState("");
 
   useEffect(() => {
@@ -135,6 +132,14 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
   const onSortEnd = ({oldIndex, newIndex}) => {
     setColors(arrayMove(colors, oldIndex, newIndex));
   };
+
+  const handleClearColors = () => {
+    setColors([]);
+  }
+
+  const addRandomColor = (color) => {
+    setColors([...colors, color])
+  }
 
   return (
     <div className={classes.root}>
@@ -194,9 +199,12 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
         <Divider />
         <ColorPicker
           addNewColor={addNewColor}
+          addRandomColor={addRandomColor}
           allColors={colors}
+          allPalettes={palettes}
           currentColor={currentColor}
           changeColor={handleChangeColor}
+          clearColors={handleClearColors}
         />
       </Drawer>
       <main
