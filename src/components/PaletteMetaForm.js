@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import { Picker } from "emoji-mart";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,11 +7,15 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import EmojiPicker from "./EmojiPicker";
 
-import "emoji-mart/css/emoji-mart.css"
-
-function PaletteMetaForm({ handleSubmit, hideDialog, palettes, showDialog }) {
+function PaletteMetaForm({
+  handleSubmit,
+  hideDialog,
+  palettes,
+}) {
   const [newPaletteName, setNewPaletteName] = useState("");
+  const [stage, setStage] = useState("dialog");
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
@@ -23,52 +26,77 @@ function PaletteMetaForm({ handleSubmit, hideDialog, palettes, showDialog }) {
   }, [palettes]);
 
   const handleClose = () => {
-    hideDialog()
+    hideDialog();
   };
 
-  const handleOnSubmit = () => {
-    handleSubmit(newPaletteName);
+  const handleOnSubmit = emoji => {
+    const newPalette = {paletteName: newPaletteName, emoji }
+    handleSubmit(newPalette);
   };
 
   const handleChange = e => {
     setNewPaletteName(e.target.value);
   };
 
+  const showEmojiPicker = () => {
+    setStage("emoji");
+  };
+
+  const hideEmojiPicker = () => {
+    setStage("dialog");
+  };
+
   return (
-    <Dialog
-      open={showDialog}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-    >
-      <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
-      <ValidatorForm onSubmit={handleOnSubmit}>
-        <DialogContent>
-          <DialogContentText>
-            Please enter a name for your new colors palette. Make sure it's
-            unique
-          </DialogContentText>
-          <Picker />
-          <TextValidator
-            label="Palette Name"
-            name="newPaletteName"
-            fullWidth
-            margin="normal"
-            value={newPaletteName}
-            validators={["required", "isPaletteNameUnique"]}
-            errorMessages={["Enter Palette Name", "Palette Name already used"]}
-            onChange={handleChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button variant="contained" color="primary" type="submit">
-            Save Button
-          </Button>
-        </DialogActions>
-      </ValidatorForm>
-    </Dialog>
+    <Fragment>
+      <Dialog
+        open={stage === "dialog"}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
+        <ValidatorForm onSubmit={showEmojiPicker}>
+          <DialogContent>
+            <DialogContentText>
+              Please enter a name for your new colors palette. Make sure it's
+              unique
+            </DialogContentText>
+            <TextValidator
+              label="Palette Name"
+              name="newPaletteName"
+              fullWidth
+              margin="normal"
+              value={newPaletteName}
+              validators={["required", "isPaletteNameUnique"]}
+              errorMessages={[
+                "Enter Palette Name",
+                "Palette Name already used",
+              ]}
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="secondary">
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={showEmojiPicker}
+            >
+              Next
+            </Button>
+          </DialogActions>
+        </ValidatorForm>
+      </Dialog>
+      {stage === "emoji" && (
+        <EmojiPicker
+          handleOnClose={handleClose}
+          savePalette={handleOnSubmit}
+          hideEmojiPicker={hideEmojiPicker}
+          showEmojiPicker
+        />
+      )}
+    </Fragment>
   );
 }
 

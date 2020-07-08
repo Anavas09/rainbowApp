@@ -48,16 +48,16 @@ const useStyles = makeStyles(theme => ({
   navButtons: {
     marginRight: "1rem",
     "& a": {
-      textDecoration: "none"
-    }
+      textDecoration: "none",
+    },
   },
   navButton: {
     margin: "0 0.5rem",
-  }
+  },
 }));
 
 function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(false);
   const classes = useStyles();
 
   const handleOnClick = () => {
@@ -65,12 +65,12 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
   };
 
   const handleClickOpen = () => {
-    setShowDialog(true)
-  }
+    setShowDialog(true);
+  };
 
   const hideDialog = () => {
-    setShowDialog(false)
-  }
+    setShowDialog(false);
+  };
 
   return (
     <div className={classes.root}>
@@ -98,16 +98,33 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
         </Toolbar>
         <div className={classes.navButtons}>
           <Link to="/">
-            <Button className={classes.navButton} variant="contained" color="secondary">
+            <Button
+              className={classes.navButton}
+              variant="contained"
+              color="secondary"
+            >
               Back
             </Button>
           </Link>
-          <Button className={classes.navButton} color="primary" variant="contained" onClick={handleClickOpen}>
+          <Button
+            className={classes.navButton}
+            color="primary"
+            variant="contained"
+            onClick={handleClickOpen}
+          >
             Save
           </Button>
         </div>
       </AppBar>
-      {showDialog && <PaletteMetaForm handleSubmit={handleSubmit} palettes={palettes} hideDialog={hideDialog} showDialog/>}
+      {showDialog && (
+        <PaletteMetaForm
+          handleSubmit={handleSubmit}
+          palettes={palettes}
+          hideDialog={hideDialog}
+          handleClickOpen={handleClickOpen}
+          showDialog
+        />
+      )}
     </div>
   );
 }
