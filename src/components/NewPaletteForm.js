@@ -14,7 +14,7 @@ import ColorPicker from "./ColorPicker";
 import DragableColorList from "./DragableColorList";
 import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 
-const drawerWidth = 340; //px
+const drawerWidth = 360; //px
 
 const useStyles = makeStyles(theme => ({
   root: {

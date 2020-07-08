@@ -136,7 +136,7 @@ function ColorPicker({
             margin="normal"
             name="newColorName"
             variant="filled"
-            placeholder="Color Name"
+            label="Color Name"
             onChange={handleChangeName}
             validators={["required", "isColorNameUnique", "isColorUnique"]}
             errorMessages={[
