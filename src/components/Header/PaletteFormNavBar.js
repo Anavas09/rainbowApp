@@ -68,6 +68,10 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
     setShowDialog(true)
   }
 
+  const hideDialog = () => {
+    setShowDialog(false)
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -95,7 +99,7 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
         <div className={classes.navButtons}>
           <Link to="/">
             <Button className={classes.navButton} variant="contained" color="secondary">
-              Go Back
+              Back
             </Button>
           </Link>
           <Button className={classes.navButton} color="primary" variant="contained" onClick={handleClickOpen}>
@@ -103,7 +107,7 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
           </Button>
         </div>
       </AppBar>
-      {showDialog && <PaletteMetaForm handleSubmit={handleSubmit} palettes={palettes} showDialog/>}
+      {showDialog && <PaletteMetaForm handleSubmit={handleSubmit} palettes={palettes} hideDialog={hideDialog} showDialog/>}
     </div>
   );
 }
