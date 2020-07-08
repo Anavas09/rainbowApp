@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
   },
   appBar: {
+    alignItems: "center",
     background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
@@ -44,16 +45,28 @@ const useStyles = makeStyles(theme => ({
   hide: {
     display: "none",
   },
-  navButtons: {},
+  navButtons: {
+    marginRight: "1rem",
+    "& a": {
+      textDecoration: "none"
+    }
+  },
+  navButton: {
+    margin: "0 0.5rem",
+  }
 }));
 
 function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
-
+  const [showDialog, setShowDialog] = useState(false)
   const classes = useStyles();
 
   const handleOnClick = () => {
     handleDrawerOpen();
   };
+
+  const handleClickOpen = () => {
+    setShowDialog(true)
+  }
 
   return (
     <div className={classes.root}>
@@ -80,14 +93,17 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
           </Typography>
         </Toolbar>
         <div className={classes.navButtons}>
-          <PaletteMetaForm handleSubmit={handleSubmit} palettes={palettes}/>
           <Link to="/">
-            <Button variant="contained" color="secondary">
+            <Button className={classes.navButton} variant="contained" color="secondary">
               Go Back
             </Button>
           </Link>
+          <Button className={classes.navButton} color="primary" variant="contained" onClick={handleClickOpen}>
+            Save
+          </Button>
         </div>
       </AppBar>
+      {showDialog && <PaletteMetaForm handleSubmit={handleSubmit} palettes={palettes} showDialog/>}
     </div>
   );
 }
