@@ -11,8 +11,34 @@ ColorPicker.defaultProps = {
 };
 
 const useStyles = makeStyles(() => ({
-  root: {
+  container: {
+    alignItems: "center",
     background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    justifyContent: "center",
+    width: "90%",
+  },
+  addColor: {
+    fontSize: "2rem",
+    marginTop: "1rem",
+    padding: "1rem",
+    width: "100%",
+  },
+  buttons: {
+    width: "100%",
+  },
+  button: {
+    width: "50%",
+  },
+  colorNameInput: {
+    height: "75px",
+    width: "100%",
+  },
+  picker: {
+    marginTop: "2rem",
+    width: "100% !important",
   },
 }));
 
@@ -74,10 +100,13 @@ function ColorPicker({
   const paletteIsFull = allColors.length >= maxColors;
 
   return (
-    <div className={classes.root}>
-      <Typography variant="button">Chose Your Colors</Typography>
-      <div>
+    <div className={classes.container}>
+      <Typography variant="h4" gutterBottom>
+        Chose Your Colors
+      </Typography>
+      <div className={classes.buttons}>
         <Button
+          className={classes.button}
           variant="contained"
           color="secondary"
           onClick={handleClearColors}
@@ -85,6 +114,7 @@ function ColorPicker({
           Clear Palette
         </Button>
         <Button
+          className={classes.button}
           variant="contained"
           color="primary"
           disabled={paletteIsFull}
@@ -93,12 +123,20 @@ function ColorPicker({
           Random Color
         </Button>
       </div>
-      <ChromePicker color={currentColor} onChangeComplete={handleChangeColor} />
+      <ChromePicker
+        color={currentColor}
+        className={classes.picker}
+        onChangeComplete={handleChangeColor}
+      />
       <ValidatorForm onSubmit={handleOnSubmit}>
         {!paletteIsFull && (
           <TextValidator
             value={newColorName}
+            className={classes.colorNameInput}
+            margin="normal"
             name="newColorName"
+            variant="filled"
+            placeholder="Color Name"
             onChange={handleChangeName}
             validators={["required", "isColorNameUnique", "isColorUnique"]}
             errorMessages={[
@@ -113,6 +151,7 @@ function ColorPicker({
           type="submit"
           variant="contained"
           disabled={paletteIsFull}
+          className={classes.addColor}
         >
           {paletteIsFull ? "Palette Full" : "Add color"}
         </Button>

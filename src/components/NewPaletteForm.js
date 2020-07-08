@@ -25,8 +25,10 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth,
+    alignItems: "center",
     background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
+    display: "flex",
+    width: drawerWidth,
   },
   drawerHeader: {
     display: "flex",
