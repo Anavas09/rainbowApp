@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { Button } from "@material-ui/core";
 
-import MenuIcon from "@material-ui/icons/Menu";
+import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteMetaForm from "../PaletteMetaForm";
 
 import useStyles from "../../styles/Header/PaletteFormNavBarStyles";
@@ -48,7 +48,7 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <MenuIcon />
+            <PaletteIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
             Create Your New Palette

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   container: {
     alignItems: "center",
-    background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
+    background: "transparent",
     display: "flex",
     flexDirection: "column",
     height: "100%",

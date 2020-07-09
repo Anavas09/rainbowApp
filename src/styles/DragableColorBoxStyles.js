@@ -5,7 +5,7 @@ const useStyles = makeStyles(() => ({
     display: "inline-block",
     height: "25%",
     margin: "0 auto",
-    marginBottom: "-3.5px",
+    marginBottom: "-5.7px",
     position: "relative",
     width: "20%",
     "&:hover": {

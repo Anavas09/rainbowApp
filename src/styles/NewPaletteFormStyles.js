@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     alignItems: "center",
-    background: "linear-gradient(100deg, rgba(250, 214, 195, 0.8), #b0eae8)",
+    background: "linear-gradient(50deg, #b0eae8, rgba(250, 214, 195, 0.8))",
     display: "flex",
     width: drawerWidth,
   },
@@ -24,11 +24,12 @@ const useStyles = makeStyles(theme => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
+    width: "100%"
   },
   content: {
     flexGrow: 1,
     height: "calc(100vh - 64px)",
-    padding: theme.spacing(3),
+    padding: 0,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
