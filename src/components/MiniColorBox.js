@@ -1,18 +1,20 @@
 import React from 'react';
-import { withStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 
-const style = {
+const useStyles = makeStyles(() => ({
   root: {
     display: "inline-block",
     height: "25%",
     margin: "0 auto",
-    marginBottom: "-3.5px",
+    marginBottom: "-4px",
     position: "relative",
     width: "20%"
   }
-}
+}));
 
-function MiniColorBox({ classes, color }) {
+function MiniColorBox({ color }) {
+  const classes = useStyles();
+
   return (
     <div
       key={color.name}
@@ -21,4 +23,4 @@ function MiniColorBox({ classes, color }) {
     ></div>)
 }
 
-export default withStyles(style)(MiniColorBox);
+export default MiniColorBox;
