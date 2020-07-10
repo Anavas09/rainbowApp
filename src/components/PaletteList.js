@@ -6,7 +6,7 @@ import MiniPalette from "./MiniPalette";
 
 import PaletteListStyles from "../styles/PaletteListStyles";
 
-function PaletteList({ classes, history, palettes }) {
+function PaletteList({ classes, deletePalette, history, palettes }) {
   const goToPalette = (id) => {
     history.push(`/palette/${id}`);
   };
@@ -15,6 +15,7 @@ function PaletteList({ classes, history, palettes }) {
     return (
       <MiniPalette
         key={palette.paletteName}
+        deletePalette={deletePalette}
         handleClick={() => goToPalette(palette.id)}
         {...palette}
       />

@@ -20,9 +20,6 @@ const useStyles = makeStyles(() => ({
     overflow: "hidden",
     width: "100%",
   },
-  delete: {
-
-  },
   deleteIcon: {
     backgroundColor: "#eb3d30",
     color: "white",
