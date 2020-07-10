@@ -14,17 +14,17 @@ export default {
       opacity: "1",
       transition: "0.5s",
     },
+    [sizes.down("lg")]: {
+      height: props => (props.showingFullPalette ? "20%" : "33.3333%"),
+      width: "25%"
+    },
+    [sizes.down("md")]: {
+      height: props => (props.showingFullPalette ? "10%" : "20%"),
+      width: "50%"
+    },
     [sizes.down("xs")]: {
       height: props => (props.showingFullPalette ? "5%" : "10%"),
       width: "100%"
-    },
-    [sizes.down("md")]: {
-      height: props => (props.showingFullPalette ? "10%" : "10%"),
-      width: "50%"
-    },
-    [sizes.down("lg")]: {
-      height: props => (props.showingFullPalette ? "20%" : "10%"),
-      width: "25%"
     },
   },
   boxContent: {
@@ -93,6 +93,9 @@ export default {
       textShadow: "1px 2px black",
       textTransform: "uppercase",
       width: "100%",
+      [sizes.down("xs")]: {
+        fontSize: "6rem",
+      },
     },
     "& p": {
       fontSize: "2rem",
