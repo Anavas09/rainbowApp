@@ -1,13 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
 import sizes from "./sizes";
+import bg from "./bg.svg"
 
 const useStyles = makeStyles(() => ({
   root: {
     alignItems: "flex-start",
-    backgroundColor: "blue",
+    /*background by SVGBackgorunds.com */
+    backgroundColor: "#1e8feb",
+    backgroundImage: `url(${bg})`,
     display: "flex",
     height: "100vh",
     justifyContent: "center",
+    overflow: "scroll"
   },
   container: {
     alignItems: "flex-start",
@@ -21,6 +25,9 @@ const useStyles = makeStyles(() => ({
     [sizes.down("xs")]: {
       width: "75%"
     },
+  },
+  heading: {
+    fontSize: "2rem"
   },
   nav: {
     alignItems: "center",
@@ -42,7 +49,7 @@ const useStyles = makeStyles(() => ({
       gridTemplateColumns: "repeat(2, 50%)",
     },
     [sizes.down("xs")]: {
-      gridGap: "1rem",
+      gridGap: "1.4rem",
       gridTemplateColumns: "repeat(1, 100%)",
     },
   },
