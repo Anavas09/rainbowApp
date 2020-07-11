@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
   root: {
     alignItems: "flex-start",
     /*background by SVGBackgorunds.com */
-    backgroundColor: "#1e8feb",
+    backgroundColor: "#ffffff",
     backgroundImage: `url(${bg})`,
     display: "flex",
     height: "100vh",
@@ -27,16 +27,17 @@ const useStyles = makeStyles(() => ({
     },
   },
   heading: {
+    color: "black",
     fontSize: "2rem"
   },
   nav: {
     alignItems: "center",
-    color: "white",
+    color: "black",
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
     "& a": {
-      color: "white",
+      color: "black",
     },
   },
   palettes: {
