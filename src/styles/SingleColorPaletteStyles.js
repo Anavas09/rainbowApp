@@ -10,10 +10,6 @@ export default {
     marginBottom: "-4.5px",
     position: "relative",
     width: "20%",
-    [sizes.down("lg")]: {
-      height: "33.3333%",
-      width: "25%"
-    },
     [sizes.down("md")]: {
       height: "20%",
       width: "50%"

@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import Slider from "rc-slider";
 import { MenuItem, Select, Snackbar, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { withStyles } from "@material-ui/styles";
 
 import NavbarStyles from "../../styles/Header/NavbarStyles";
 
 import "rc-slider/assets/index.css";
 
-function NavBar({ changelevel, changeformat, classes, level, showSlider }) {
+function NavBar({ changelevel, changeformat, level, showSlider }) {
   const [format, setFormat] = useState("hex");
   const [snackopen, setSnackOpen] = useState(false);
+
+  const classes = NavbarStyles();
 
   const changeColorFormat = (e) => {
     setFormat(e.target.value);
@@ -72,4 +73,4 @@ function NavBar({ changelevel, changeformat, classes, level, showSlider }) {
   );
 }
 
-export default withStyles(NavbarStyles)(NavBar);
+export default NavBar;

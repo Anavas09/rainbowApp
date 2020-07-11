@@ -14,10 +14,6 @@ export default {
       opacity: "1",
       transition: "0.5s",
     },
-    [sizes.down("lg")]: {
-      height: props => (props.showingFullPalette ? "20%" : "33.3333%"),
-      width: "25%"
-    },
     [sizes.down("md")]: {
       height: props => (props.showingFullPalette ? "10%" : "20%"),
       width: "50%"
@@ -51,6 +47,7 @@ export default {
       chroma(props.background).luminance() >= 0.5
         ? "rgba(0, 0, 0, 0.8)"
         : "white",
+    cursor: "pointer",
     display: "inline-block",
     fontSize: "1rem",
     height: "30px",

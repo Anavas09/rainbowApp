@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import sizes from "./sizes";
 
 const useStyles = makeStyles(() => ({
   DragableColorBox: {
@@ -15,6 +16,20 @@ const useStyles = makeStyles(() => ({
       color: "white",
       cursor: "pointer",
       transform: "scale(1.5)",
+    },
+    [sizes.down("lg")]: {
+      height: "20%",
+      marginBottom: "-6.1px",
+      width: "25%"
+    },
+    [sizes.down("md")]: {
+      height: "10%",
+      marginBottom: "-6.1px",
+      width: "50%"
+    },
+    [sizes.down("sm")]: {
+      marginBottom: "-5.1px",
+      width: "100%"
     },
   },
   boxContent: {
