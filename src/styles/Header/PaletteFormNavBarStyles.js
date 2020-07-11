@@ -38,13 +38,13 @@ const useStyles = makeStyles(theme => ({
     "& a": {
       textDecoration: "none",
     },
-    [sizes.down("sm")]: {
+    [sizes.down("xs")]: {
       marginRight: "0.5rem",
     },
   },
   navButton: {
     margin: "0 0.5rem",
-    [sizes.down("sm")]: {
+    [sizes.down("xs")]: {
       margin: "0 0.2rem",
       padding: "0.3rem"
     },
