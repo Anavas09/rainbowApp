@@ -70,7 +70,7 @@ function ColorPicker({
 
   return (
     <div className={classes.container}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Chose Your Colors
       </Typography>
       <div className={classes.buttons}>

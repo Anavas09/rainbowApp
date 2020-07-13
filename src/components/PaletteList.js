@@ -1,29 +1,37 @@
 import React from "react";
-import { withStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import MiniPalette from "./MiniPalette";
 
 import PaletteListStyles from "../styles/PaletteListStyles";
 
 function PaletteList({ deletePalette, history, palettes }) {
-
   const classes = PaletteListStyles();
 
-  const goToPalette = (id) => {
+  const goToPalette = id => {
     history.push(`/palette/${id}`);
   };
 
-  const renderPalettes = palettes.map((palette) => {
-    return (
-      <MiniPalette
-        key={palette.paletteName}
-        deletePalette={deletePalette}
-        handleClick={() => goToPalette(palette.id)}
-        {...palette}
-      />
-    );
-  });
+  const renderPalettes = (
+    <TransitionGroup className={classes.palettes}>
+      {palettes.map(palette => {
+        return (
+          <CSSTransition
+            key={palette.paletteName}
+            classNames="fade"
+            timeout={500}
+          >
+            <MiniPalette
+              deletePalette={deletePalette}
+              handleClick={() => goToPalette(palette.id)}
+              {...palette}
+            />
+          </CSSTransition>
+        );
+      })}
+    </TransitionGroup>
+  );
 
   return (
     <div className={classes.root}>
@@ -32,10 +40,10 @@ function PaletteList({ deletePalette, history, palettes }) {
           <h1 className={classes.heading}>React Colors</h1>
           <Link to="/palette/new">New Palette</Link>
         </nav>
-        <div className={classes.palettes}>{renderPalettes}</div>
+        {renderPalettes}
       </div>
     </div>
   );
 }
 
-export default withStyles(PaletteListStyles)(PaletteList);
+export default PaletteList;

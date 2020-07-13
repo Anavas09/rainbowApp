@@ -1,8 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
 import sizes from "./sizes";
-import bg from "./bg.svg"
+import bg from "./bg.svg";
 
 const useStyles = makeStyles(() => ({
+  "@global": {
+    ".fade-exit": {
+      opacity: 1,
+    },
+    ".fade-exit-active": {
+      opacity: 0,
+      transition: "opacity 500ms ease-out",
+    },
+  },
   root: {
     alignItems: "flex-start",
     /*background by SVGBackgorunds.com */
@@ -11,7 +20,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     height: "100vh",
     justifyContent: "center",
-    overflow: "scroll"
+    overflow: "scroll",
   },
   container: {
     alignItems: "flex-start",
@@ -20,15 +29,15 @@ const useStyles = makeStyles(() => ({
     flexWrap: "wrap",
     width: "50%",
     [sizes.down("xl")]: {
-      width: "80%"
+      width: "80%",
     },
     [sizes.down("xs")]: {
-      width: "75%"
+      width: "75%",
     },
   },
   heading: {
     color: "black",
-    fontSize: "2rem"
+    fontSize: "2rem",
   },
   nav: {
     alignItems: "center",
