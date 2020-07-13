@@ -33,7 +33,6 @@ function App() {
   };
 
   const deletePalette = paletteId => {
-    alert(paletteId)
     const newPalettes = palettes.filter(palette => palette.id !== paletteId)
     setPalettes(newPalettes);
   }

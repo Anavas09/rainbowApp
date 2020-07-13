@@ -6,12 +6,12 @@ import MiniColorBoxesList from "./MiniColorBoxesList";
 
 import MiniPaletteStyles from "../styles/MiniPaletteStyles";
 
-function MiniPalette({ colors, deletePalette, emoji, handleClick, id, paletteName }) {
+function MiniPalette({ colors, openDialog, emoji, handleClick, id, paletteName }) {
   const classes = MiniPaletteStyles();
 
-  const handleDelete = e => {
+  const handleOnClick = e => {
     e.stopPropagation()
-    deletePalette(id)
+    openDialog(id)
   }
 
   return (
@@ -19,7 +19,7 @@ function MiniPalette({ colors, deletePalette, emoji, handleClick, id, paletteNam
       <DeleteIcon
         className={classes.deleteIcon}
         style={{ transition: "all 0.3s ease-in-out" }}
-        onClick={handleDelete}
+        onClick={handleOnClick}
       />
       <div className={classes.colors}>
         <MiniColorBoxesList colors={colors} />
