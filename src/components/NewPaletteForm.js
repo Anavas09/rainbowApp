@@ -96,6 +96,7 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
           removeColor={removeColor}
           axis="xy"
           onSortEnd={onSortEnd}
+          distance={10}
         />
       </main>
     </div>
