@@ -1,11 +1,11 @@
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForeverSharp";
+import { withStyles } from "@material-ui/styles";
 
 import useDragableColorBoxStyles from "../styles/DragableColorBoxStyles";
 
-const DragableColorBox = SortableElement(({ color, colorName, removeColor }) => {
-  const classes = useDragableColorBoxStyles();
+const DragableColorBox = SortableElement(({ color, classes, colorName, removeColor }) => {
 
   const handleOnClick = () => {
     removeColor()
@@ -26,4 +26,4 @@ const DragableColorBox = SortableElement(({ color, colorName, removeColor }) => 
   );
 })
 
-export default DragableColorBox;
+export default withStyles(useDragableColorBoxStyles)(DragableColorBox);

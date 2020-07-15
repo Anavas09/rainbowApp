@@ -1,7 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles";
+import chroma from "chroma-js";
 import sizes from "./sizes";
 
-const useStyles = makeStyles(() => ({
+export default {
   DragableColorBox: {
     display: "inline-block",
     height: "25%",
@@ -20,21 +20,24 @@ const useStyles = makeStyles(() => ({
     [sizes.down("lg")]: {
       height: "20%",
       marginBottom: "-6.1px",
-      width: "25%"
+      width: "25%",
     },
     [sizes.down("md")]: {
       height: "10%",
       marginBottom: "-6.1px",
-      width: "50%"
+      width: "50%",
     },
     [sizes.down("sm")]: {
       marginBottom: "-5.1px",
-      width: "100%"
+      width: "100%",
     },
   },
   boxContent: {
     bottom: "0px",
-    color: "rgba(0, 0, 0, 0.5)",
+    color: props =>
+      chroma(props.color).luminance() <= 0.08
+        ? "rgba(225,255,255,0.8)"
+        : "rgba(0, 0, 0, 0.8)",
     display: "flex",
     fontSize: "12px",
     justifyContent: "space-between",
@@ -48,6 +51,4 @@ const useStyles = makeStyles(() => ({
   deleteIcon: {
     transition: "all 0.3s ease-in-out",
   },
-}));
-
-export default useStyles;
+};

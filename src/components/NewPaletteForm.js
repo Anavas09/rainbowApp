@@ -14,10 +14,12 @@ import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 
 import useStyles from "../styles/NewPaletteFormStyles";
 
+import seedColors from "../seedColors";
+
 function NewPaletteForm({ history, palettes, saveNewPalette }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [colors, setColors] = useState(palettes[0].colors);
+  const [colors, setColors] = useState(seedColors[0].colors);
 
   const handleDrawerOpen = () => {
     setOpen(true);
