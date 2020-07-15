@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Picker } from "emoji-mart";
 
 import Button from "@material-ui/core/Button";
@@ -14,6 +14,8 @@ function EmojiPicker({
   savePalette,
   showEmojiPicker,
 }) {
+  const [paletteEmoji, setPaletteEmoji] = useState("🎨");
+
   const handleClose = () => {
     handleOnClose();
   };
@@ -23,7 +25,11 @@ function EmojiPicker({
   };
 
   const handleOnSelect = emoji => {
-    savePalette(emoji.native);
+    setPaletteEmoji(emoji.native);
+  };
+
+  const handleOnClick = () => {
+    savePalette(paletteEmoji);
   };
 
   return (
@@ -34,7 +40,7 @@ function EmojiPicker({
         <Button onClick={backToDialog} variant="contained" color="secondary">
           Back
         </Button>
-        <Button variant="contained" color="primary" type="submit">
+        <Button variant="contained" color="primary" onClick={handleOnClick}>
           Save
         </Button>
       </DialogActions>

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { withStyles } from "@material-ui/styles";
 import SingleColorPaletteStyles from "../styles/SingleColorPaletteStyles";
 
 import ColorBox from "./ColorBox";
 import NavBar from "./Header/NavBar";
 import Footer from "./Footer/Footer";
 
-function SingleColorPalette({ colorId, classes ,palette }) {
+function SingleColorPalette({ colorId, palette }) {
   const [format, setFormat] = useState("hex");
+
+  const classes = SingleColorPaletteStyles();
 
   const gatherShades = (palette, colorToFilterBy) => {
     let shades = [];
@@ -54,4 +55,4 @@ function SingleColorPalette({ colorId, classes ,palette }) {
   );
 }
 
-export default withStyles(SingleColorPaletteStyles)(SingleColorPalette);
+export default SingleColorPalette;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/styles";
 
 import ColorBox from "./ColorBox";
 import NavBar from "./Header/NavBar";
@@ -7,9 +6,11 @@ import Footer from "./Footer/Footer";
 
 import PaletteStyles from "../styles/PaletteStyles";
 
-function Palette({ classes, palette }) {
+function Palette({ palette }) {
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
+
+  const classes = PaletteStyles();
 
   const changeLevel = (newLevel) => {
     setLevel(newLevel);
@@ -45,4 +46,4 @@ function Palette({ classes, palette }) {
   );
 }
 
-export default withStyles(PaletteStyles)(Palette);
+export default Palette;

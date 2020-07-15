@@ -1,4 +1,6 @@
-export default {
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(() => ({
   SingleColorBox: {
     cursor: "pointer",
     backgroundColor: "red",
@@ -35,4 +37,6 @@ export default {
   paletteColors: {
     height: "90%",
   },
-};
+}));
+
+export default useStyles;
