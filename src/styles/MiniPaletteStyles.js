@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "white",
+    backgroundColor: "#e9e9e9",
     border: "1px solid black",
     borderRadius: "5px",
     cursor: "pointer",

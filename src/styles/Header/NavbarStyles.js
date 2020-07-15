@@ -45,8 +45,8 @@ const useStyles = makeStyles(() => ({
     "& .rc-slider-track": {
       backgroundColor: "transparent",
     },
-    [sizes.down("xs")]: {
-      width: "120px"
+    [sizes.down("sm")]: {
+      width: "150px"
     },
   },
   selectContainer: {

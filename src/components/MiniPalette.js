@@ -6,16 +6,29 @@ import MiniColorBoxesList from "./MiniColorBoxesList";
 
 import MiniPaletteStyles from "../styles/MiniPaletteStyles";
 
-function MiniPalette({ colors, openDialog, emoji, handleClick, id, paletteName }) {
+function MiniPalette({
+  colors,
+  openDialog,
+  emoji,
+  goToPalette,
+  id,
+  paletteName,
+}) {
   const classes = MiniPaletteStyles();
 
+  console.log(`RENDERING: ${paletteName}`);
+
+  const handleGoToPalette = () => {
+    goToPalette(id);
+  };
+
   const handleOnClick = e => {
-    e.stopPropagation()
-    openDialog(id)
-  }
+    e.stopPropagation();
+    openDialog(id);
+  };
 
   return (
-    <div className={classes.root} onClick={handleClick}>
+    <div className={classes.root} onClick={handleGoToPalette}>
       <DeleteIcon
         className={classes.deleteIcon}
         style={{ transition: "all 0.3s ease-in-out" }}

@@ -55,7 +55,7 @@ function PaletteList({ deletePalette, history, palettes }) {
           >
             <MiniPalette
               openDialog={openDialog}
-              handleClick={() => goToPalette(palette.id)}
+              goToPalette={goToPalette}
               {...palette}
             />
           </CSSTransition>
