@@ -5,7 +5,7 @@ import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-import useStyles from "../styles/ColorPickerStyles";
+import ColorPickerStyles from "../styles/ColorPickerStyles";
 
 ColorPicker.defaultProps = {
   maxColors: 20,
@@ -13,7 +13,6 @@ ColorPicker.defaultProps = {
 
 function ColorPicker({
   addNewColor,
-  addRandomColor,
   allColors,
   allPalettes,
   clearColors,
@@ -22,7 +21,7 @@ function ColorPicker({
   const [currentColor, setCurrentColor] = useState("skyblue");
   const [newColorName, setNewColorName] = useState("");
 
-  const classes = useStyles();
+  const classes = ColorPickerStyles();
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -60,10 +59,19 @@ function ColorPicker({
     //One array with all colors
     const colors = newColors.flat();
 
-    const randNum = Math.floor(Math.random() * colors.length);
-    const randColor = colors[randNum];
+    let randNum;
+    let randColor;
 
-    addRandomColor(randColor);
+    //Verificate if randColor is already use
+    let isDuplicateColor = true;
+    while(isDuplicateColor){
+      randNum = Math.floor(Math.random() * colors.length);
+      randColor = colors[randNum];
+
+      isDuplicateColor = allColors.some(color => color.name === randColor.name )
+    }
+    
+    addNewColor(randColor);
   };
 
   const paletteIsFull = allColors.length >= maxColors;

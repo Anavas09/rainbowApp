@@ -1,11 +1,12 @@
 import chroma from "chroma-js";
 import sizes from "./sizes";
+import { makeStyles } from "@material-ui/styles";
 
-export default {
+const useStyles = makeStyles(() => ({
   ColorBox: {
     cursor: "pointer",
     display: "inline-block",
-    height: props => (props.showingFullPalette ? "25%" : "50%"),
+    height: ({showingFullPalette}) => (showingFullPalette ? "25%" : "50%"),
     margin: "0 auto",
     marginBottom: "-4.5px",
     position: "relative",
@@ -15,11 +16,11 @@ export default {
       transition: "0.5s",
     },
     [sizes.down("md")]: {
-      height: props => (props.showingFullPalette ? "10%" : "20%"),
+      height: ({showingFullPalette}) => (showingFullPalette ? "10%" : "20%"),
       width: "50%"
     },
     [sizes.down("xs")]: {
-      height: props => (props.showingFullPalette ? "5%" : "10%"),
+      height: ({showingFullPalette}) => (showingFullPalette ? "5%" : "10%"),
       width: "100%"
     },
   },
@@ -35,16 +36,16 @@ export default {
     width: "100%",
   },
   colorName: {
-    color: props =>
-      chroma(props.background).luminance() <= 0.08
+    color: ({background}) =>
+      chroma(background).luminance() <= 0.08
         ? "white"
         : "rgba(0, 0, 0, 0.8)",
   },
   copyButton: {
     background: "rgba(255, 255, 255, 0.3)",
     border: "none",
-    color: props =>
-      chroma(props.background).luminance() >= 0.5
+    color: ({background}) =>
+      chroma(background).luminance() >= 0.5
         ? "rgba(0, 0, 0, 0.8)"
         : "white",
     cursor: "pointer",
@@ -108,8 +109,8 @@ export default {
     zIndex: "0",
   },
   copyText: {
-    color: props =>
-      chroma(props.background).luminance() >= 0.5
+    color: ({background}) =>
+      chroma(background).luminance() >= 0.5
         ? "rgba(0, 0, 0, 0.8)"
         : "white",
   },
@@ -117,8 +118,8 @@ export default {
     background: "rgba(255, 255, 255, 0.3)",
     border: "none",
     bottom: "0px",
-    color: props =>
-      chroma(props.background).luminance() >= 0.5
+    color: ({background}) =>
+      chroma(background).luminance() >= 0.5
         ? "rgba(0, 0, 0, 0.8)"
         : "white",
     height: "30px",
@@ -142,4 +143,6 @@ export default {
     transform: "scale(50)",
     zIndex: "10",
   },
-};
+}));
+
+export default useStyles;

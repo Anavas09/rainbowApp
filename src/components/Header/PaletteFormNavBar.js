@@ -12,11 +12,11 @@ import { Button } from "@material-ui/core";
 import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteMetaForm from "../PaletteMetaForm";
 
-import useStyles from "../../styles/Header/PaletteFormNavBarStyles";
+import PaletteFormNavBarStyles from "../../styles/Header/PaletteFormNavBarStyles";
 
-function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
+function PaletteFormNavBar({ hadColors, handleDrawerOpen, handleSubmit, open, palettes }) {
   const [showDialog, setShowDialog] = useState(false);
-  const classes = useStyles();
+  const classes = PaletteFormNavBarStyles();
 
   const handleOnClick = () => {
     handleDrawerOpen();
@@ -69,6 +69,7 @@ function PaletteFormNavBar({ handleDrawerOpen, handleSubmit, open, palettes }) {
             color="primary"
             variant="contained"
             onClick={handleClickOpen}
+            disabled={!hadColors}
           >
             Save
           </Button>

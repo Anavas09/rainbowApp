@@ -12,14 +12,15 @@ import ColorPicker from "./ColorPicker";
 import DragableColorList from "./DragableColorList";
 import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 
-import useStyles from "../styles/NewPaletteFormStyles";
+import NewPaletteFormStyles from "../styles/NewPaletteFormStyles";
 
 import seedColors from "../seedColors";
 
 function NewPaletteForm({ history, palettes, saveNewPalette }) {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [colors, setColors] = useState(seedColors[0].colors);
+  
+  const classes = NewPaletteFormStyles();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -52,9 +53,7 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
     setColors([]);
   };
 
-  const addRandomColor = color => {
-    setColors([...colors, color]);
-  };
+  const hadColors = colors.length > 0;
 
   return (
     <div className={classes.root}>
@@ -63,6 +62,7 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
         handleSubmit={handleSubmit}
         open={open}
         palettes={palettes}
+        hadColors={hadColors}
       />
       <Drawer
         className={classes.drawer}
@@ -81,7 +81,6 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
         <Divider />
         <ColorPicker
           addNewColor={addNewColor}
-          addRandomColor={addRandomColor}
           allColors={colors}
           allPalettes={palettes}
           clearColors={handleClearColors}

@@ -35,7 +35,7 @@ function EmojiPicker({
   return (
     <Dialog open={showEmojiPicker} onClose={handleClose}>
       <DialogTitle>Chose an emoji</DialogTitle>
-      <Picker title="Pick a emoji for your palette" onSelect={handleOnSelect} />
+      <Picker title={paletteEmoji === "🎨" ? "Pick a emoji for your palette": paletteEmoji} onSelect={handleOnSelect} />
       <DialogActions>
         <Button onClick={backToDialog} variant="contained" color="secondary">
           Back

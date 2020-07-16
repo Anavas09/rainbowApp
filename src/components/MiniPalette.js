@@ -6,14 +6,14 @@ import MiniColorBoxesList from "./MiniColorBoxesList";
 
 import MiniPaletteStyles from "../styles/MiniPaletteStyles";
 
-function MiniPalette({
+const MiniPalette = React.memo(({
   colors,
   openDialog,
   emoji,
   goToPalette,
   id,
   paletteName,
-}) {
+}) => {
   const classes = MiniPaletteStyles();
 
   console.log(`RENDERING: ${paletteName}`);
@@ -42,6 +42,6 @@ function MiniPalette({
       </h5>
     </div>
   );
-}
+})
 
 export default MiniPalette;

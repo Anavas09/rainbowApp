@@ -68,8 +68,8 @@ function PaletteList({ deletePalette, history, palettes }) {
     <div className={classes.root}>
       <div className={classes.container}>
         <nav className={classes.nav}>
-          <h1 className={classes.heading}>React Colors</h1>
-          <Link to="/palette/new">New Palette</Link>
+          <h1 className={classes.heading}>Your Palettes</h1>
+          <Link to="/palette/new">Create Palette</Link>
         </nav>
         {renderPalettes}
       </div>
