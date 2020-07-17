@@ -15,19 +15,20 @@ import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 import NewPaletteFormStyles from "../styles/NewPaletteFormStyles";
 
 import seedColors from "../seedColors";
+import useToggle from "../hooks/useToggle";
 
 function NewPaletteForm({ history, palettes, saveNewPalette }) {
-  const [open, setOpen] = useState(false);
+  const [open, toggleOpen] = useToggle(false);
   const [colors, setColors] = useState(seedColors[0].colors);
   
   const classes = NewPaletteFormStyles();
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    toggleOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    toggleOpen(false);
   };
 
   const addNewColor = newColor => {

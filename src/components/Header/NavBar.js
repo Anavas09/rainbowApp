@@ -7,21 +7,22 @@ import CloseIcon from "@material-ui/icons/Close";
 import NavbarStyles from "../../styles/Header/NavbarStyles";
 
 import "rc-slider/assets/index.css";
+import useToggle from "../../hooks/useToggle";
 
 function NavBar({ changelevel, changeformat, level, showSlider }) {
   const [format, setFormat] = useState("hex");
-  const [snackopen, setSnackOpen] = useState(false);
+  const [snackopen, toggleSnackOpen] = useToggle(false);
 
   const classes = NavbarStyles();
 
   const changeColorFormat = (e) => {
     setFormat(e.target.value);
     changeformat(e.target.value);
-    setSnackOpen(true);
+    toggleSnackOpen(true);
   };
 
   const closeSnackBar = () => {
-    setSnackOpen(false);
+    toggleSnackOpen(false);
   };
 
   return (

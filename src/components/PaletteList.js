@@ -18,9 +18,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import MiniPalette from "./MiniPalette";
 
 import PaletteListStyles from "../styles/PaletteListStyles";
+import useToggle from "../hooks/useToggle";
 
 function PaletteList({ deletePalette, history, palettes }) {
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openDeleteDialog, toogleOpenDeleteDialog] = useToggle(false);
   const [delettePaleteId, setDeletePaletteId] = useState("");
 
   const classes = PaletteListStyles();
@@ -30,12 +31,12 @@ function PaletteList({ deletePalette, history, palettes }) {
   };
 
   const openDialog = paletteId => {
-    setOpenDeleteDialog(true);
+    toogleOpenDeleteDialog(true);
     setDeletePaletteId(paletteId);
   };
 
   const closeDialog = () => {
-    setOpenDeleteDialog(false);
+    toogleOpenDeleteDialog(false);
     setDeletePaletteId("");
   };
 

@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 
 import ColorBoxStyles from "../styles/ColorBoxStyles";
+import useToggle from "../hooks/useToggle";
 
 function ColorBox({ background, name, moreUrl, showingFullPalette }) {
-  const [copied, setCopied] = useState(false);
+  const [copied, toggleCopied] = useToggle(false);
 
   const classes = ColorBoxStyles({background, showingFullPalette});
 
   const changeCopyState = () => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    toggleCopied(true);
+    setTimeout(() => toggleCopied(false), 1500);
   };
   return (
     <CopyToClipboard text={background} onCopy={changeCopyState}>

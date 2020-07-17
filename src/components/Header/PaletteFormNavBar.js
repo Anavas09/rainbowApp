@@ -13,9 +13,10 @@ import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteMetaForm from "../PaletteMetaForm";
 
 import PaletteFormNavBarStyles from "../../styles/Header/PaletteFormNavBarStyles";
+import useToggle from "../../hooks/useToggle";
 
 function PaletteFormNavBar({ hadColors, handleDrawerOpen, handleSubmit, open, palettes }) {
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, toggleShowDialog] = useToggle(false);
   const classes = PaletteFormNavBarStyles();
 
   const handleOnClick = () => {
@@ -23,11 +24,11 @@ function PaletteFormNavBar({ hadColors, handleDrawerOpen, handleSubmit, open, pa
   };
 
   const handleClickOpen = () => {
-    setShowDialog(true);
+    toggleShowDialog(true);
   };
 
   const hideDialog = () => {
-    setShowDialog(false);
+    toggleShowDialog(false);
   };
 
   return (
