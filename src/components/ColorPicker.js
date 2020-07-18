@@ -118,7 +118,7 @@ function ColorPicker({
             validators={["required", "isColorNameUnique", "isColorUnique"]}
             errorMessages={[
               "Enter a color name",
-              "The color name already used",
+              "This color name already used",
               "This color has been used",
             ]}
           />

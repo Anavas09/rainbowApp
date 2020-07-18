@@ -9,11 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EmojiPicker from "./EmojiPicker";
 
-function PaletteMetaForm({
-  handleSubmit,
-  hideDialog,
-  palettes,
-}) {
+function PaletteMetaForm({ handleSubmit, hideDialog, palettes }) {
   const [newPaletteName, setNewPaletteName] = useState("");
   const [stage, setStage] = useState("dialog");
 
@@ -30,7 +26,7 @@ function PaletteMetaForm({
   };
 
   const handleOnSubmit = emoji => {
-    const newPalette = {paletteName: newPaletteName, emoji }
+    const newPalette = { paletteName: newPaletteName, emoji };
     handleSubmit(newPalette);
     setStage("");
   };
@@ -67,23 +63,20 @@ function PaletteMetaForm({
               fullWidth
               margin="normal"
               value={newPaletteName}
+              variant="filled"
+              onChange={handleChange}
               validators={["required", "isPaletteNameUnique"]}
               errorMessages={[
                 "Enter Palette Name",
-                "Palette Name already used",
+                "This Palette Name already used",
               ]}
-              onChange={handleChange}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="secondary">
+            <Button variant="contained" color="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={showEmojiPicker}
-            >
+            <Button variant="contained" color="primary" type="submit">
               Next
             </Button>
           </DialogActions>

@@ -5,10 +5,8 @@ import { useState } from "react";
  * @param {boolean} initialValue 
  * useToggle accept an initial boolean value and change to
  * the opposite value
- * 
- * e.g.
- * initialValue = true -->
- * useToggle(true) return false 
+ * @returns The opposite value and a function to change that value
+ * @example useToggle(true) return [false, toggle]
  */
 function useToggle(initialValue = false) {
   const [state, setState] = useState(initialValue);
