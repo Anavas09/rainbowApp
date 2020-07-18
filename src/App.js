@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
@@ -10,24 +10,15 @@ import Page from "./components/Page";
 
 import seedColors from "./seedColors";
 import { generatePalette } from "./helpers/colorHelper";
-
-const storagePalettes = JSON.parse(window.localStorage.getItem("palettes"));
+import useLocalStorageState from "./hooks/useLocalStorageState";
 
 function App() {
-  const [palettes, setPalettes] = useState(storagePalettes || seedColors);
-
-  useEffect(() => {
-    syncWithLocalStorage();
-  });
+  const [palettes, setPalettes] = useLocalStorageState("palettes", seedColors);
 
   const findPalette = id => {
     return palettes.find(palette => {
       return palette.id === id;
     });
-  };
-
-  const syncWithLocalStorage = () => {
-    window.localStorage.setItem("palettes", JSON.stringify(palettes));
   };
 
   const savePalette = newPalette => {
