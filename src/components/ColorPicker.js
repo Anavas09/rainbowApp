@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ChromePicker } from "react-color";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+
+import { PaletteContext } from "../context/PaletteContext";
 
 import ColorPickerStyles from "../styles/ColorPickerStyles";
 
@@ -11,15 +13,11 @@ ColorPicker.defaultProps = {
   maxColors: 20,
 };
 
-function ColorPicker({
-  addNewColor,
-  allColors,
-  allPalettes,
-  clearColors,
-  maxColors,
-}) {
+function ColorPicker({ addNewColor, allColors, clearColors, maxColors }) {
   const [currentColor, setCurrentColor] = useState("skyblue");
   const [newColorName, setNewColorName] = useState("");
+
+  const { palettes } = useContext(PaletteContext);
 
   const classes = ColorPickerStyles();
 
@@ -52,8 +50,8 @@ function ColorPicker({
 
   const handleRandomColor = () => {
     //newColors Array with arrays
-    const newColors = allPalettes.map(palettes => {
-      return palettes.colors;
+    const newColors = palettes.map(palette => {
+      return palette.colors;
     });
 
     //One array with all colors
@@ -64,13 +62,13 @@ function ColorPicker({
 
     //Verificate if randColor is already use
     let isDuplicateColor = true;
-    while(isDuplicateColor){
+    while (isDuplicateColor) {
       randNum = Math.floor(Math.random() * colors.length);
       randColor = colors[randNum];
 
-      isDuplicateColor = allColors.some(color => color.name === randColor.name )
+      isDuplicateColor = allColors.some(color => color.name === randColor.name);
     }
-    
+
     addNewColor(randColor);
   };
 

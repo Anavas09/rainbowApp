@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
  * The key for the localStorage e.g. localStorage.getItem(key)
  * @param {*} defaultValue
  * If it's nothing in localStorage, set the state to this defaltValue.
- * 
+ *
  * @returns
  * A stateful value and a function to update it
- * 
+ *
  */
 function UseLocalStorageState(key, defaultValue) {
   //Make a piece of state, based off of value in localStorage (or default)

@@ -8,26 +8,20 @@ import SingleColorPalette from "./components/SingleColorPalette";
 import NewPaletteForm from "./components/NewPaletteForm";
 import Page from "./components/Page";
 
-import seedColors from "./seedColors";
+import UseLocalStorageState from "./hooks/useLocalStorageState";
+
+import { PaletteProvider } from "./context/PaletteContext";
+
 import { generatePalette } from "./helpers/colorHelper";
-import useLocalStorageState from "./hooks/useLocalStorageState";
+import seedColors from "./seedColors";
 
 function App() {
-  const [palettes, setPalettes] = useLocalStorageState("palettes", seedColors);
+  const [palettes] = UseLocalStorageState("palettes", seedColors);
 
   const findPalette = id => {
     return palettes.find(palette => {
       return palette.id === id;
     });
-  };
-
-  const savePalette = newPalette => {
-    setPalettes([...palettes, newPalette]);
-  };
-
-  const deletePalette = paletteId => {
-    const newPalettes = palettes.filter(palette => palette.id !== paletteId);
-    setPalettes(newPalettes);
   };
 
   return (
@@ -41,11 +35,11 @@ function App() {
                 path="/palette/new"
                 render={routeProps => (
                   <Page>
+                    <PaletteProvider>
                     <NewPaletteForm
-                      saveNewPalette={savePalette}
-                      palettes={palettes}
                       {...routeProps}
                     />
+                    </PaletteProvider>
                   </Page>
                 )}
               />
@@ -54,11 +48,11 @@ function App() {
                 path="/"
                 render={routerProps => (
                   <Page>
+                    <PaletteProvider>
                     <PaletteList
-                      palettes={palettes}
-                      deletePalette={deletePalette}
                       {...routerProps}
                     />
+                    </PaletteProvider>
                   </Page>
                 )}
               />

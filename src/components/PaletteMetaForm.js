@@ -1,5 +1,7 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useContext } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+
+import { PaletteContext } from "../context/PaletteContext";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,9 +11,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EmojiPicker from "./EmojiPicker";
 
-function PaletteMetaForm({ handleSubmit, hideDialog, palettes }) {
+function PaletteMetaForm({ handleSubmit, hideDialog }) {
   const [newPaletteName, setNewPaletteName] = useState("");
   const [stage, setStage] = useState("dialog");
+
+  const { palettes } = useContext(PaletteContext);
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value =>

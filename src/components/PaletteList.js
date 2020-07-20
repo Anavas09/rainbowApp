@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
@@ -15,14 +15,19 @@ import red from "@material-ui/core/colors/red";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 
+import { PaletteContext } from "../context/PaletteContext";
+
+import useToggle from "../hooks/useToggle";
+
 import MiniPalette from "./MiniPalette";
 
 import PaletteListStyles from "../styles/PaletteListStyles";
-import useToggle from "../hooks/useToggle";
 
-function PaletteList({ deletePalette, history, palettes }) {
-  const [openDeleteDialog, toogleOpenDeleteDialog] = useToggle(false);
+function PaletteList({ history }) {
   const [delettePaleteId, setDeletePaletteId] = useState("");
+  const [openDeleteDialog, toogleOpenDeleteDialog] = useToggle(false);
+
+  const { deletePalette, palettes } = useContext(PaletteContext);
 
   const classes = PaletteListStyles();
 

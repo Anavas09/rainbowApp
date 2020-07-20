@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import clsx from "clsx";
 import arrayMove from "array-move";
 
@@ -12,15 +12,19 @@ import ColorPicker from "./ColorPicker";
 import DragableColorList from "./DragableColorList";
 import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 
+import { PaletteContext } from "../context/PaletteContext";
+
 import NewPaletteFormStyles from "../styles/NewPaletteFormStyles";
 
 import seedColors from "../seedColors";
 import useToggle from "../hooks/useToggle";
 
-function NewPaletteForm({ history, palettes, saveNewPalette }) {
+function NewPaletteForm({ history }) {
   const [open, toggleOpen] = useToggle(false);
   const [colors, setColors] = useState(seedColors[0].colors);
-  
+
+  const { savePalette } = useContext(PaletteContext);
+
   const classes = NewPaletteFormStyles();
 
   const handleDrawerOpen = () => {
@@ -42,7 +46,7 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
   const handleSubmit = newPalette => {
     newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
     newPalette.colors = colors;
-    saveNewPalette(newPalette);
+    savePalette(newPalette);
     history.push("/");
   };
 
@@ -62,7 +66,6 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
         handleDrawerOpen={handleDrawerOpen}
         handleSubmit={handleSubmit}
         open={open}
-        palettes={palettes}
         hadColors={hadColors}
       />
       <Drawer
@@ -83,7 +86,6 @@ function NewPaletteForm({ history, palettes, saveNewPalette }) {
         <ColorPicker
           addNewColor={addNewColor}
           allColors={colors}
-          allPalettes={palettes}
           clearColors={handleClearColors}
         />
       </Drawer>
