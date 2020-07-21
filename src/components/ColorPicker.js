@@ -5,7 +5,7 @@ import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-import { PaletteContext } from "../context/PaletteContext";
+import { PaletteContext } from "../context/PaletteContext.context";
 
 import ColorPickerStyles from "../styles/ColorPickerStyles";
 

@@ -12,7 +12,7 @@ import ColorPicker from "./ColorPicker";
 import DragableColorList from "./DragableColorList";
 import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 
-import { PaletteContext } from "../context/PaletteContext";
+import { PaletteContext } from "../context/PaletteContext.context";
 
 import NewPaletteFormStyles from "../styles/NewPaletteFormStyles";
 

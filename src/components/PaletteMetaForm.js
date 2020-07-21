@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment, useContext } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 
-import { PaletteContext } from "../context/PaletteContext";
+import { PaletteContext } from "../context/PaletteContext.context";
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
@@ -8,18 +8,15 @@ import SingleColorPalette from "./components/SingleColorPalette";
 import NewPaletteForm from "./components/NewPaletteForm";
 import Page from "./components/Page";
 
-import UseLocalStorageState from "./hooks/useLocalStorageState";
-
-import { PaletteProvider } from "./context/PaletteContext";
+import { PaletteContext } from "./context/PaletteContext.context";
 
 import { generatePalette } from "./helpers/colorHelper";
-import seedColors from "./seedColors";
 
 function App() {
-  const [palettes] = UseLocalStorageState("palettes", seedColors);
+  const { allPalettes } = useContext(PaletteContext);  
 
   const findPalette = id => {
-    return palettes.find(palette => {
+    return allPalettes.find(palette => {
       return palette.id === id;
     });
   };
@@ -35,11 +32,7 @@ function App() {
                 path="/palette/new"
                 render={routeProps => (
                   <Page>
-                    <PaletteProvider>
-                    <NewPaletteForm
-                      {...routeProps}
-                    />
-                    </PaletteProvider>
+                    <NewPaletteForm {...routeProps} />
                   </Page>
                 )}
               />
@@ -48,11 +41,7 @@ function App() {
                 path="/"
                 render={routerProps => (
                   <Page>
-                    <PaletteProvider>
-                    <PaletteList
-                      {...routerProps}
-                    />
-                    </PaletteProvider>
+                    <PaletteList {...routerProps} />
                   </Page>
                 )}
               />

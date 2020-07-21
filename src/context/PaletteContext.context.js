@@ -1,5 +1,6 @@
-import React, { createContext } from "react";
+import React, { createContext, useReducer } from "react";
 
+import paletteReducer from "../reducers/palette.reducer";
 import UseLocalStorageState from "../hooks/useLocalStorageState";
 import seedColors from "../seedColors";
 
@@ -7,6 +8,8 @@ const PaletteContext = createContext();
 
 function PaletteProvider({ children }) {
   const [palettes, setPalettes] = UseLocalStorageState("palettes", seedColors);
+
+  const [allPalettes, dispatch] = useReducer(paletteReducer, palettes);
 
   const savePalette = newPalette => {
     setPalettes([...palettes, newPalette]);
@@ -20,9 +23,8 @@ function PaletteProvider({ children }) {
   return (
     <PaletteContext.Provider
       value={{
-        palettes,
-        savePalette,
-        deletePalette,
+        allPalettes,
+        dispatch
       }}
     >
       {children}
