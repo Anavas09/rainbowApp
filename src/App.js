@@ -13,7 +13,7 @@ import { PaletteContext } from "./context/PaletteContext.context";
 import { generatePalette } from "./helpers/colorHelper";
 
 function App() {
-  const { allPalettes } = useContext(PaletteContext);  
+  const allPalettes = useContext(PaletteContext);  
 
   const findPalette = id => {
     return allPalettes.find(palette => {

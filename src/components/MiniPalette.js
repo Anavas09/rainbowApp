@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import DeleteIcon from "@material-ui/icons/DeleteForeverSharp";
 
@@ -6,14 +6,14 @@ import MiniColorBoxesList from "./MiniColorBoxesList";
 
 import MiniPaletteStyles from "../styles/MiniPaletteStyles";
 
-const MiniPalette = React.memo(({
+function MiniPalette({
   colors,
   openDialog,
   emoji,
   goToPalette,
   id,
   paletteName,
-}) => {
+}) {
   const classes = MiniPaletteStyles();
 
   console.log(`RENDERING: ${paletteName}`);
@@ -42,6 +42,6 @@ const MiniPalette = React.memo(({
       </h5>
     </div>
   );
-})
+}
 
-export default MiniPalette;
+export default memo(MiniPalette);

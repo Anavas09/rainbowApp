@@ -1,35 +1,21 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext } from "react";
 
 import paletteReducer from "../reducers/palette.reducer";
-import UseLocalStorageState from "../hooks/useLocalStorageState";
 import seedColors from "../seedColors";
+import UseLocalStorageReducer from "../hooks/useLocalStorageReducer";
 
 const PaletteContext = createContext();
 
+const DispatchContext = createContext();
+
 function PaletteProvider({ children }) {
-  const [palettes, setPalettes] = UseLocalStorageState("palettes", seedColors);
-
-  const [allPalettes, dispatch] = useReducer(paletteReducer, palettes);
-
-  const savePalette = newPalette => {
-    setPalettes([...palettes, newPalette]);
-  };
-
-  const deletePalette = paletteId => {
-    const newPalettes = palettes.filter(palette => palette.id !== paletteId);
-    setPalettes(newPalettes);
-  };
+  const [palettes, dispatch] = UseLocalStorageReducer("palettes", seedColors, paletteReducer);
 
   return (
-    <PaletteContext.Provider
-      value={{
-        allPalettes,
-        dispatch
-      }}
-    >
-      {children}
+    <PaletteContext.Provider value={palettes}>
+      <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
     </PaletteContext.Provider>
   );
 }
 
-export { PaletteContext, PaletteProvider };
+export { DispatchContext, PaletteContext, PaletteProvider };

@@ -12,7 +12,7 @@ import ColorPicker from "./ColorPicker";
 import DragableColorList from "./DragableColorList";
 import PaletteFormNavBar from "./Header/PaletteFormNavBar";
 
-import { PaletteContext } from "../context/PaletteContext.context";
+import { DispatchContext } from "../context/PaletteContext.context";
 
 import NewPaletteFormStyles from "../styles/NewPaletteFormStyles";
 
@@ -23,7 +23,7 @@ function NewPaletteForm({ history }) {
   const [open, toggleOpen] = useToggle(false);
   const [colors, setColors] = useState(seedColors[0].colors);
 
-  const { savePalette } = useContext(PaletteContext);
+  const dispatch = useContext(DispatchContext);
 
   const classes = NewPaletteFormStyles();
 
@@ -46,7 +46,8 @@ function NewPaletteForm({ history }) {
   const handleSubmit = newPalette => {
     newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
     newPalette.colors = colors;
-    savePalette(newPalette);
+    const action = {type: "ADD", newPalette}
+    dispatch(action);
     history.push("/");
   };
 

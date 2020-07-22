@@ -17,7 +17,7 @@ function ColorPicker({ addNewColor, allColors, clearColors, maxColors }) {
   const [currentColor, setCurrentColor] = useState("skyblue");
   const [newColorName, setNewColorName] = useState("");
 
-  const { palettes } = useContext(PaletteContext);
+  const allPalettes = useContext(PaletteContext);
 
   const classes = ColorPickerStyles();
 
@@ -50,7 +50,7 @@ function ColorPicker({ addNewColor, allColors, clearColors, maxColors }) {
 
   const handleRandomColor = () => {
     //newColors Array with arrays
-    const newColors = palettes.map(palette => {
+    const newColors = allPalettes.map(palette => {
       return palette.colors;
     });
 

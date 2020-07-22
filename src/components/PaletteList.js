@@ -15,7 +15,7 @@ import red from "@material-ui/core/colors/red";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { PaletteContext } from "../context/PaletteContext.context";
+import { PaletteContext, DispatchContext } from "../context/PaletteContext.context";
 
 import useToggle from "../hooks/useToggle";
 
@@ -27,7 +27,9 @@ function PaletteList({ history }) {
   const [delettePaleteId, setDeletePaletteId] = useState("");
   const [openDeleteDialog, toogleOpenDeleteDialog] = useToggle(false);
 
-  const { allPalettes, dispatch } = useContext(PaletteContext);
+  const allPalettes = useContext(PaletteContext);
+
+  const dispatch = useContext(DispatchContext);
 
   const classes = PaletteListStyles();
 

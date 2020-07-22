@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 
 import ColorBoxStyles from "../styles/ColorBoxStyles";
-import useToggle from "../hooks/useToggle";
 
 function ColorBox({ background, name, moreUrl, showingFullPalette }) {
-  const [copied, toggleCopied] = useToggle(false);
+  const [copied, toggleCopied] = useState(false);
 
   const classes = ColorBoxStyles({background, showingFullPalette});
 

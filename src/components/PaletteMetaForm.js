@@ -15,15 +15,15 @@ function PaletteMetaForm({ handleSubmit, hideDialog }) {
   const [newPaletteName, setNewPaletteName] = useState("");
   const [stage, setStage] = useState("dialog");
 
-  const { palettes } = useContext(PaletteContext);
+  const allPalettes = useContext(PaletteContext);
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-      palettes.every(
+      allPalettes.every(
         ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
       )
     );
-  }, [palettes]);
+  }, [allPalettes]);
 
   const handleClose = () => {
     hideDialog();
