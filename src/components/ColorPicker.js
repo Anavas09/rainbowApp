@@ -66,6 +66,7 @@ function ColorPicker({ addNewColor, allColors, clearColors, maxColors }) {
       randNum = Math.floor(Math.random() * colors.length);
       randColor = colors[randNum];
 
+      // eslint-disable-next-line
       isDuplicateColor = allColors.some(color => color.name === randColor.name);
     }
 
